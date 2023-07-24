@@ -36,16 +36,31 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
-  adapter: PrismaAdapter(prisma),
+    // callbacks: {
+    //     session({ session, user }) {
+    //         return { ...session, user: { ...session.user, ...user } };
+    //     },
+    // },
+    callbacks: {
+      session: ({ session, user }) => ({
+        ...session,
+        user: {
+          ...session.user,
+        //   id: user.id,
+        ...user,
+        },
+      }),
+    },
+    adapter: PrismaAdapter(prisma),
+    secret: env.NEXTAUTH_SECRET,
+  //   session: {
+  //     strategy: "jwt",
+  //     maxAge: 30 * 24 * 60 * 60, // 30 days
+  //     updateAge: 24 * 60 * 60, // 24 hours
+  //   },
+  //   jwt: {
+  //     secret: env.NEXTAUTH_SECRET,
+  //   },
   providers: [
     KakaoProvider({
       clientId: env.KAKAO_CLIENT_ID,

@@ -53,14 +53,6 @@ export const authOptions: NextAuthOptions = {
     },
     adapter: PrismaAdapter(prisma),
     secret: env.NEXTAUTH_SECRET,
-  //   session: {
-  //     strategy: "jwt",
-  //     maxAge: 30 * 24 * 60 * 60, // 30 days
-  //     updateAge: 24 * 60 * 60, // 24 hours
-  //   },
-  //   jwt: {
-  //     secret: env.NEXTAUTH_SECRET,
-  //   },
   providers: [
     KakaoProvider({
       clientId: env.KAKAO_CLIENT_ID,

@@ -72,7 +72,7 @@ export default function NavBar() {
                 <Link href="/">
                   <button
                     className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-500"
-                    onClick={() => void signIn("google", { callbackUrl: "/" })}
+                    onClick={() => void signIn("kakao", { callbackUrl: "/" })}
                   >
                     Sign In
                   </button>

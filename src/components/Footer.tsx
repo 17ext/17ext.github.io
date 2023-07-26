@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
             className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
             href="/"
           >
-            <svg
+            {/* <svg
               width="22"
               height="24"
               viewBox="0 0 22 24"
@@ -23,8 +24,9 @@ export default function Footer() {
                 stroke="#7C3AED"
                 stroke-width="0.5"
               ></path>
-            </svg>
-            <span>Contentlayer</span>
+            </svg> */}
+            <Image src="/images/logo-32.png" width={22} height={24} />
+            <span>플라이</span>
           </a>
           <div className="mt-4 text-sm text-slate-500 dark:text-slate-400">
             <p>

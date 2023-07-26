@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Fly</title>
-        <meta name="description" content="Fly" />
+        <title>플라이</title>
+        <meta name="description" content="플라이" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>

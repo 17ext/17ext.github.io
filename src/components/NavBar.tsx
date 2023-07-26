@@ -3,12 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
+import { useTheme } from "next-themes";
 
 export default function NavBar() {
-  const session = useSession();
-  const user = session.data?.user;
-
-  const [active, setActive] = useState(0);
+//   const session = useSession();
+//   const user = session.data?.user;
+//   const [active, setActive] = useState(0);
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  console.log(currentTheme);
 
   return (
     <header className="fixed z-50 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
@@ -86,7 +89,8 @@ export default function NavBar() {
                   </svg>
                 </span>
                 <span className="mr-8 text-slate-400 dark:text-slate-500">
-                  Search...
+                  {" "}
+                  Search...{" "}
                 </span>
                 <span className="inline-block whitespace-nowrap rounded border border-slate-400/70 px-1.5 align-middle font-medium leading-4 tracking-wide text-slate-500 [font-size:10px] dark:border-slate-600 dark:text-slate-400">
                   ⌘K
@@ -96,6 +100,9 @@ export default function NavBar() {
           </div>
           <div className="flex items-center pl-2 lg:space-x-2 lg:pl-8">
             <button
+              onClick={() =>
+                theme == "dark" ? setTheme("light") : setTheme("dark")
+              }
               type="button"
               id="radix-:R3dl6:"
               aria-haspopup="menu"
@@ -112,32 +119,6 @@ export default function NavBar() {
                 </svg>
               </span>
             </button>
-            <a
-              className="group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none text-slate-600 hover:bg-gray-50 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-gray-900 dark:hover:text-slate-200"
-              target="_blank"
-              rel="noreferrer"
-              href="https://github.com/contentlayerdev/contentlayer"
-            >
-              <span className="block w-5 text-slate-400 group-hover:text-slate-500 dark:text-slate-500 dark:group-hover:text-slate-400">
-                <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M127.975 10C61.1744 10 7 64.167 7 130.99C7 184.444 41.663 229.787 89.7396 245.786C95.7928 246.9 97.9987 243.164 97.9987 239.955C97.9987 237.088 97.8947 229.475 97.8353 219.382C64.1824 226.69 57.082 203.161 57.082 203.161C51.5784 189.182 43.6461 185.461 43.6461 185.461C32.6612 177.96 44.4779 178.108 44.4779 178.108C56.6215 178.963 63.0089 190.579 63.0089 190.579C73.8007 209.065 91.329 203.725 98.2215 200.628C99.3208 192.814 102.448 187.482 105.901 184.459C79.0369 181.406 50.7911 171.023 50.7911 124.662C50.7911 111.456 55.5074 100.65 63.2466 92.1974C61.9988 89.1374 57.847 76.8304 64.435 60.1785C64.435 60.1785 74.588 56.9254 97.7016 72.582C107.35 69.8934 117.703 68.5565 127.99 68.5045C138.269 68.5565 148.615 69.8934 158.278 72.582C181.377 56.9254 191.515 60.1785 191.515 60.1785C198.118 76.8304 193.966 89.1374 192.726 92.1974C200.48 100.65 205.159 111.456 205.159 124.662C205.159 171.142 176.869 181.369 149.923 184.362C154.26 188.098 158.13 195.481 158.13 206.77C158.13 222.939 157.981 235.989 157.981 239.955C157.981 243.193 160.165 246.959 166.3 245.778C214.339 229.743 248.973 184.429 248.973 130.99C248.973 64.167 194.798 10 127.975 10Z"></path>
-                </svg>
-              </span>
-              <span className="sr-only">Github</span>
-            </a>
-            <a
-              className="group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none text-slate-600 hover:bg-gray-50 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-gray-900 dark:hover:text-slate-200"
-              target="_blank"
-              rel="noreferrer"
-              href="https://discord.gg/rytFErsARm"
-            >
-              <span className="block w-5 text-slate-400 group-hover:text-slate-500 dark:text-slate-500 dark:group-hover:text-slate-400">
-                <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M209.914 52.3C194.638 45.1524 178.303 39.9578 161.226 37C159.129 40.7918 156.678 45.8919 154.989 49.9491C136.835 47.219 118.849 47.219 101.029 49.9491C99.3397 45.8919 96.8338 40.7918 94.7177 37C77.6219 39.9578 61.2686 45.1715 45.9919 52.3378C15.1787 98.9007 6.82569 144.307 11.0022 189.069C31.4391 204.33 51.245 213.601 70.7167 219.668C75.5243 213.052 79.8121 206.018 83.5059 198.605C76.4709 195.932 69.7329 192.633 63.3662 188.803C65.0553 187.552 66.7074 186.244 68.3036 184.898C107.136 203.06 149.328 203.06 187.696 184.898C189.311 186.244 190.962 187.552 192.633 188.803C186.248 192.652 179.491 195.951 172.456 198.624C176.15 206.018 180.419 213.071 185.245 219.687C204.736 213.62 224.56 204.349 244.997 189.069C249.897 137.178 236.626 92.1892 209.914 52.3ZM88.7962 161.541C77.1393 161.541 67.5796 150.658 67.5796 137.406C67.5796 124.154 76.9351 113.252 88.7962 113.252C100.658 113.252 110.217 124.135 110.013 137.406C110.031 150.658 100.658 161.541 88.7962 161.541ZM167.203 161.541C155.546 161.541 145.986 150.658 145.986 137.406C145.986 124.154 155.342 113.252 167.203 113.252C179.064 113.252 188.624 124.135 188.42 137.406C188.42 150.658 179.064 161.541 167.203 161.541Z"></path>
-                </svg>
-              </span>
-              <span className="sr-only">Discord</span>
-            </a>
           </div>
         </nav>
       </div>

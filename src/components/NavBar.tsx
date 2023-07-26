@@ -10,84 +10,53 @@ export default function NavBar() {
 
   const [active, setActive] = useState(0);
 
-  const buttonStyle = { unfocused: "bg-gray-900", focused: "bg-gray-500" };
-  const isPageWithSidebar = false;
-  const currTheme = "light";
-
   return (
-    <div className="sticky top-0 z-20 mx-auto flex max-w-[1420px] items-center justify-center">
-      <NavBar
-        // fluid={true}
-        rounded={true}
-        className="z-20 w-full border-b border-gray-200 bg-white px-2 py-2.5 dark:border-gray-600 dark:bg-gray-900 sm:px-4"
-      >
-        <div className="container mx-auto flex flex-wrap items-center justify-between">
-          <NavBar.Brand href="/" className="flex cursor-pointer items-center">
-            {/* <img
-                            src={Logo.src}
-                            className="h-6 mr-3 sm:h-9"
-                            alt="Logo"
-                        /> */}
-            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-              Fly
+    <Navbar fluid rounded>
+      <Navbar.Brand href="https://flowbite-react.com">
+        <img
+          alt="Flowbite React Logo"
+          className="mr-3 h-6 sm:h-9"
+          src="https://flowbite-react.com/favicon.svg"
+        />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          Flowbite React
+        </span>
+      </Navbar.Brand>
+      <div className="flex md:order-2">
+        <Dropdown
+          inline
+          label={
+            <Avatar
+              alt="User settings"
+              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              rounded
+            />
+          }
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">Bonnie Green</span>
+            <span className="block truncate text-sm font-medium">
+              name@flowbite.com
             </span>
-          </NavBar.Brand>
-
-          <div className="flex gap-2">
-            {/* Day - night toggler */}
-            <span className="ml-auto">
-              {currTheme.length > 0 ? (
-                <button
-                  onClick={() => {}}
-                  id="theme-toggle"
-                  type="button"
-                  className="rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700 md:float-right md:mr-4"
-                >
-                  <svg
-                    id="theme-toggle-dark-icon"
-                    className={`₹{
-                                            currTheme == "dark" && "hidden"
-                                        } h-5 w-5`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                  </svg>
-                  <svg
-                    id="theme-toggle-light-icon"
-                    className={`${currTheme == "light" && "hidden"} h-5 w-5`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              ) : null}
-              {/* <Nav.Toggle className="" /> */}
-            </span>
-            <div className="">
-              {session ? (
-                // <MenuDropdown session={session} />
-                <hr />
-              ) : (
-                <button
-                  onClick={() => void signIn("kakao", { callbackUrl: "/" })}
-                  className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:focus:ring-primary-900 mr-3 inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-center text-base font-medium text-white focus:ring-4"
-                >
-                  Login
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </NavBar>
-    </div>
+          </Dropdown.Header>
+          <Dropdown.Item>Dashboard</Dropdown.Item>
+          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>Sign out</Dropdown.Item>
+        </Dropdown>
+        <Navbar.Toggle />
+      </div>
+      <Navbar.Collapse>
+        <Navbar.Link active href="#">
+          <p>Home</p>
+        </Navbar.Link>
+        <Navbar.Link href="#">About</Navbar.Link>
+        <Navbar.Link href="#">Services</Navbar.Link>
+        <Navbar.Link href="#">Pricing</Navbar.Link>
+        <Navbar.Link href="#">Contact</Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
 
     // <nav className="bg-gray-800">
     //   <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

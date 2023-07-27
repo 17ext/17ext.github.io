@@ -20,7 +20,7 @@ export default function NavBar() {
   return (
     <header className="fixed z-50 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
       <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-4 md:px-8 lg:px-16">
-        <div className="flex items-center space-x-2.5">
+        <div className="flex items-center justify-start">
           <a
             className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
             href="/"
@@ -36,6 +36,35 @@ export default function NavBar() {
           <span className="inline-block whitespace-nowrap rounded border border-slate-400/70 px-1.5 align-middle font-medium leading-4 tracking-wide text-slate-500 [font-size:10px] dark:border-slate-600 dark:text-slate-400">
             Beta
           </span>
+
+          <form action="#" method="GET" className="hidden lg:block lg:pl-2">
+            <label for="search" className="sr-only">
+              검색
+            </label>
+            <div className="relative mt-1 lg:w-96">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg
+                  className="h-5 w-5 text-gray-500 dark:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                className="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm"
+                placeholder="검색"
+              />
+            </div>
+          </form>
         </div>
         <div className="lg:hidden">
           <button
@@ -53,6 +82,7 @@ export default function NavBar() {
               </svg>
             </span>
           </button>
+          d
         </div>
         <nav className="hidden items-center divide-x divide-gray-200 dark:divide-gray-800 lg:flex">
           <div className="flex items-center pr-2 lg:space-x-4 lg:pr-8">
@@ -60,37 +90,14 @@ export default function NavBar() {
               className="group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none text-slate-600 hover:bg-gray-50 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-gray-900 dark:hover:text-slate-200"
               href="/docs"
             >
-              <span className="">Documentation</span>
+              <span className="">게시글</span>
             </a>
             <a
               className="group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none text-slate-600 hover:bg-gray-50 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-gray-900 dark:hover:text-slate-200"
               href="/examples/nextjs"
             >
-              <span className="">Examples</span>
+              <span className="">태그</span>
             </a>
-            <div className="px-3">
-              <button
-                aria-label="Search"
-                className="flex h-8 cursor-text items-center rounded-md border border-gray-200 bg-gray-50 px-2 text-sm hover:border-gray-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700 dark:hover:bg-gray-800"
-              >
-                <span className="mr-2 block w-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="current"
-                    viewBox="0 0 512 512"
-                  >
-                    <path d="M504.1 471l-134-134C399.1 301.5 415.1 256.8 415.1 208c0-114.9-93.13-208-208-208S-.0002 93.13-.0002 208S93.12 416 207.1 416c48.79 0 93.55-16.91 129-45.04l134 134C475.7 509.7 481.9 512 488 512s12.28-2.344 16.97-7.031C514.3 495.6 514.3 480.4 504.1 471zM48 208c0-88.22 71.78-160 160-160s160 71.78 160 160s-71.78 160-160 160S48 296.2 48 208z"></path>
-                  </svg>
-                </span>
-                <span className="mr-8 text-slate-400 dark:text-slate-500">
-                  {" "}
-                  Search...{" "}
-                </span>
-                <span className="inline-block whitespace-nowrap rounded border border-slate-400/70 px-1.5 align-middle font-medium leading-4 tracking-wide text-slate-500 [font-size:10px] dark:border-slate-600 dark:text-slate-400">
-                  ⌘K
-                </span>
-              </button>
-            </div>
           </div>
           <div className="flex items-center pl-2 lg:space-x-2 lg:pl-8">
             <button
@@ -120,36 +127,30 @@ export default function NavBar() {
                 )}
               </span>
             </button>
-
-            <Dropdown
-              inline
-              label={
-                <Avatar
-                  alt="User settings"
-                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  rounded
-                />
-              }
-            >
-              <Dropdown.Header>
-                <span className="block text-sm">Bonnie Green</span>
-                <span className="block truncate text-sm font-medium">
-                  name@flowbite.com
-                </span>
-              </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
-              <Dropdown.Item>Settings</Dropdown.Item>
-              <Dropdown.Item>Earnings</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item>Sign out</Dropdown.Item>
-            </Dropdown>
-
-            <button
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-black no-underline transition hover:bg-white/20"
-              onClick={user ? () => void signOut() : () => void signIn("kakao")}
-            >
-              {user ? "Sign out" : "Sign in"}
-            </button>
+            {user ? (
+              <Dropdown inline label={<Avatar rounded size="sm" />}>
+                <Dropdown.Header>
+                  <span className="block text-sm">Bonnie Green</span>
+                  <span className="block truncate text-sm font-medium">
+                    name@flowbite.com
+                  </span>
+                </Dropdown.Header>
+                <Dropdown.Item>Dashboard</Dropdown.Item>
+                <Dropdown.Item>Settings</Dropdown.Item>
+                <Dropdown.Item>Earnings</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={() => void signOut()}>
+                  로그아웃
+                </Dropdown.Item>
+              </Dropdown>
+            ) : (
+              <button
+                className="rounded-full bg-white/10 px-10 py-3 font-semibold text-black no-underline transition hover:bg-white/20"
+                onClick={() => void signIn("kakao")}
+              >
+                로그인
+              </button>
+            )}
           </div>
         </nav>
       </div>

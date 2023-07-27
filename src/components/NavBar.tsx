@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 export default function NavBar() {
-//   const session = useSession();
-//   const user = session.data?.user;
+  const session = useSession();
+  const user = session.data?.user;
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -119,6 +119,12 @@ export default function NavBar() {
                   </svg>
                 )}
               </span>
+            </button>
+            <button
+              className="rounded-full bg-white/10 px-10 py-3 font-semibold text-black no-underline transition hover:bg-white/20"
+              onClick={user ? () => void signOut() : () => void signIn("kakao")}
+            >
+              {user ? "Sign out" : "Sign in"}
             </button>
           </div>
         </nav>

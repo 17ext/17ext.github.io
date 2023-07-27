@@ -25,7 +25,7 @@ export default function Footer() {
                 stroke-width="0.5"
               ></path>
             </svg> */}
-            <Image src="/images/logo-32.png" width={22} height={24} />
+            <Image src="/images/logo-32.png" width={22} height={24} alt="로고" />
             <span>플라이</span>
           </a>
           <div className="mt-4 text-sm text-slate-500 dark:text-slate-400">

@@ -5,10 +5,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main>
       <NavBar />
-      <div className="max-w-2xl mx-auto px-6 pt-4">
-        {children}
+      <div className="flex min-h-screen flex-col justify-between">
+        <main className="relative pt-16">{children}</main>
+        <Footer />
       </div>
-      <Footer />
     </main>
   );
 }

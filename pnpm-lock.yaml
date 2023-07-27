@@ -53,9 +53,6 @@ dependencies:
   nextjs-progressbar:
     specifier: ^0.0.16
     version: 0.0.16(next@13.4.2)(react@18.2.0)
-  nextjs-theme-toggle:
-    specifier: ^1.0.1
-    version: 1.0.1
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -2449,12 +2446,6 @@ packages:
       next: 13.4.2(react-dom@18.2.0)(react@18.2.0)
       nprogress: 0.2.0
       prop-types: 15.8.1
-      react: 18.2.0
-    dev: false
-
-  /nextjs-theme-toggle@1.0.1:
-    resolution: {integrity: sha512-GYFAT1hkzHTBkP1Vjc5xw/hYNAntmK+/ahq+RxdQkViw2bXmSVs6xbflDH3pJDstSPuKjcHi2ghH9gaAqdiM+g==}
-    dependencies:
       react: 18.2.0
     dev: false
 

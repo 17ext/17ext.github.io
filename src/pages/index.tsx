@@ -1,10 +1,11 @@
 // import { signIn, signOut, useSession } from "next-auth/react";
 import Layout from "~/components/Layout";
 import Head from "next/head";
+import PostCard from "~/components/posts/PostCard";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
   return (
     <>
@@ -14,11 +15,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex flex-col items-center gap-2">
+        <section className="bg-white dark:bg-gray-900">
+          <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-10">
+            <div className="grid gap-8 lg:grid-cols-2">
+              <PostCard />
+              <PostCard />
+              <PostCard />
+              <PostCard />
+              <PostCard />
+            </div>
+          </div>
+        </section>
+
+        {/* <div className="flex flex-col items-center gap-2">
           <p className="text-2xl text-black">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p>
-        </div>
+        </div> */}
       </Layout>
     </>
   );

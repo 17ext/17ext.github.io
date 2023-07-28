@@ -1,9 +1,15 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Head from "next/head";
-import { api } from "~/utils/api";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
-export default function Signin() {
+export default function SignIn() {
+  const { data: session } = useSession();
+  const { push } = useRouter();
+
+  if (session) push("/").catch(console.error);
+
   return (
     <>
       <Head>
@@ -36,7 +42,7 @@ export default function Signin() {
                   아직 계정이 없으신가요?
                   <a
                     className="font-medium text-blue-600 decoration-2 hover:underline"
-                    href="../examples/html/signup.html"
+                    href="#"
                   >
                     회원가입
                   </a>

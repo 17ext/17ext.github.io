@@ -5,6 +5,12 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
+const listSchema = z.object({
+  name: z.string().nonempty(),
+  alias: z.string().nonempty(),
+  regex: z.string().optional(),
+});
+
 export const postRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
@@ -14,43 +20,96 @@ export const postRouter = createTRPCRouter({
       };
     }),
 
-//   getAll: publicProcedure
-//     .input(z.object({ topicId: z.optional(z.string()) }))
-//     .query(async ({ ctx, input }) => {
-//       const userId = ctx.session?.user?.id;
+  // getAll: publicProcedure.query(({ ctx }) => {
+  //   return ctx.prisma.post.findMany();
+  // }),
 
-//       const topicId = input.topicId?.toLowerCase() ?? "";
+  getAll: publicProcedure
+    .input(
+      z.object({
+        offset: z.number().optional(),
+        limit: z.number().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const [count, rows] = await ctx.prisma.$transaction([
+        ctx.prisma.list.count(),
+        ctx.prisma.list.findMany({
+          skip: input.offset,
+          take: input.limit,
+          include: {
+            _count: {
+              select: {
+                items: true,
+              },
+            },
+          },
+        }),
+      ]);
+      return {
+        count,
+        rows: rows.map((list) => {
+          return {
+            ...list,
+            author: undefined,
+          };
+        }),
+      };
+    }),
+  create: protectedProcedure
+    .input(listSchema)
+    .mutation(async ({ ctx, input }) => {
+      const result = await ctx.prisma.list.create({
+        data: {
+          ...input,
+          createdBy: ctx.session.user.id,
+        },
+      });
+      return result;
+    }),
+  get: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const result = await ctx.prisma.list.findUnique({
+        where: {
+          id: input.id,
+        },
+        include: {
+          items: true,
+        },
+      });
 
-//       const posts = await ctx.prisma.post.findMany({
-//         ...(topicId ? { where: { topicId } } : {}),
-//         include: {
-//           options: {
-//             include: {
-//               userVotes: {
-//                 where: { userId: userId ?? "" },
-//               },
-//             },
-//           },
-//           PostVote: {
-//             where: {
-//               userId: userId ?? "",
-//             },
-//           },
-//         },
-//         orderBy: {
-//           createdAt: "desc",
-//         },
-//         take: 100,
-//       });
+      if (!result) return null;
 
-//       const result = [];
-//       for (const post of posts) {
-//         result.push(filterPost(post));
-//       }
-//       return result;
-//     }),
-
-    getAll: publicProcedure.query(({ ctx }) => {
-      return ctx.prisma.post.findMany();
+      return {
+        ...result,
+        author: undefined,
+        items: result.items.map((item) => {
+          return {
+            ...item,
+            author: undefined,
+          };
+        }),
+      };
+    }),
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        data: listSchema,
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const result = await ctx.prisma.rule.update({
+        where: {
+          id: input.id,
+        },
+        data: input.data,
+      });
+      return result;
     }),
 });

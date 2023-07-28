@@ -1,7 +1,6 @@
-// import { signIn, signOut, useSession } from "next-auth/react";
 import Layout from "~/components/Layout";
 import Head from "next/head";
-import PostCard from "~/components/posts/PostCard";
+import {PostList} from "~/components/posts/PostList";
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -18,11 +17,12 @@ export default function Home() {
         <section className="bg-white dark:bg-gray-900">
           <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-10">
             <div className="grid gap-8 lg:grid-cols-2">
+              <PostList />
+              {/* <PostCard />
               <PostCard />
               <PostCard />
               <PostCard />
-              <PostCard />
-              <PostCard />
+              <PostCard /> */}
             </div>
           </div>
         </section>

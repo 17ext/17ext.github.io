@@ -14,11 +14,43 @@ export const postRouter = createTRPCRouter({
       };
     }),
 
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.post.findMany();
-  }),
+//   getAll: publicProcedure
+//     .input(z.object({ topicId: z.optional(z.string()) }))
+//     .query(async ({ ctx, input }) => {
+//       const userId = ctx.session?.user?.id;
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
+//       const topicId = input.topicId?.toLowerCase() ?? "";
+
+//       const posts = await ctx.prisma.post.findMany({
+//         ...(topicId ? { where: { topicId } } : {}),
+//         include: {
+//           options: {
+//             include: {
+//               userVotes: {
+//                 where: { userId: userId ?? "" },
+//               },
+//             },
+//           },
+//           PostVote: {
+//             where: {
+//               userId: userId ?? "",
+//             },
+//           },
+//         },
+//         orderBy: {
+//           createdAt: "desc",
+//         },
+//         take: 100,
+//       });
+
+//       const result = [];
+//       for (const post of posts) {
+//         result.push(filterPost(post));
+//       }
+//       return result;
+//     }),
+
+    getAll: publicProcedure.query(({ ctx }) => {
+      return ctx.prisma.post.findMany();
+    }),
 });

@@ -27,35 +27,72 @@ export const postRouter = createTRPCRouter({
   getAll: publicProcedure
     .input(
       z.object({
-        offset: z.number().optional(),
-        limit: z.number().optional(),
+        limit: z.number().min(1).max(100).default(20),
+        cursor: z.string().nullish(),
       })
     )
     .query(async ({ ctx, input }) => {
-      const [count, rows] = await ctx.prisma.$transaction([
-        ctx.prisma.list.count(),
-        ctx.prisma.list.findMany({
-          skip: input.offset,
-          take: input.limit,
-          include: {
-            _count: {
-              select: {
-                items: true,
-              },
-            },
-          },
-        }),
-      ]);
+      const limit = input.limit ?? 50;
+      const { cursor } = input;
+      const posts = await prisma.post.findMany({
+        take: limit + 1,
+        cursor: cursor ? { id: cursor } : undefined,
+        orderBy: {
+          created_at: "desc",
+        },
+        // include: {
+        //   post_category: {
+        //     include: {
+        //       category: true,
+        //     },
+        //   },
+        // },
+      });
+
+      let nextCursor: typeof cursor | undefined = undefined;
+
+      if (posts.length > limit) {
+        const nextItem = posts.pop();
+        nextCursor = nextItem!.id;
+      }
       return {
-        count,
-        rows: rows.map((list) => {
-          return {
-            ...list,
-            author: undefined,
-          };
-        }),
+        posts,
+        nextCursor,
       };
     }),
+
+  //   getAll: publicProcedure
+  //     .input(
+  //       z.object({
+  //         offset: z.number().optional(),
+  //         limit: z.number().optional(),
+  //       })
+  //     )
+  //     .query(async ({ ctx, input }) => {
+  //       const [count, rows] = await ctx.prisma.$transaction([
+  //         ctx.prisma.list.count(),
+  //         ctx.prisma.list.findMany({
+  //           skip: input.offset,
+  //           take: input.limit,
+  //           include: {
+  //             _count: {
+  //               select: {
+  //                 items: true,
+  //               },
+  //             },
+  //           },
+  //         }),
+  //       ]);
+  //       return {
+  //         count,
+  //         rows: rows.map((list) => {
+  //           return {
+  //             ...list,
+  //             author: undefined,
+  //           };
+  //         }),
+  //       };
+  //     }),
   create: protectedProcedure
     .input(listSchema)
     .mutation(async ({ ctx, input }) => {

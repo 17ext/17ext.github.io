@@ -33,13 +33,9 @@ export default function NavBar() {
               height={24}
               alt="로고"
             />
-            <span className="-mt-0.5">플라이</span>
+            <span className="-mt-0.5 hidden lg:block">플라이</span>
           </a>
-          <span className="inline-block whitespace-nowrap rounded border border-slate-400/70 px-1.5 align-middle font-medium leading-4 tracking-wide text-slate-500 [font-size:10px] dark:border-slate-600 dark:text-slate-400">
-            Beta
-          </span>
-
-          <form action="#" method="GET" className="hidden lg:block lg:pl-5">
+          <form action="#" method="GET" className="pl-2 lg:pl-5">
             <label for="search" className="sr-only">
               검색
             </label>
@@ -84,19 +80,18 @@ export default function NavBar() {
               </svg>
             </span>
           </button>
-          d
         </div>
         <nav className="hidden items-center divide-x divide-gray-200 dark:divide-gray-800 lg:flex">
           <div className="flex items-center pr-2 lg:space-x-4 lg:pr-8">
             <a
               className="group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none text-slate-600 hover:bg-gray-50 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-gray-900 dark:hover:text-slate-200"
-              href="/docs"
+              href="#"
             >
               <span className="">게시글</span>
             </a>
             <a
               className="group flex h-8 items-center rounded-md bg-transparent px-3 text-sm font-medium leading-none text-slate-600 hover:bg-gray-50 hover:text-slate-700 dark:text-slate-300 dark:hover:bg-gray-900 dark:hover:text-slate-200"
-              href="/examples/nextjs"
+              href="#"
             >
               <span className="">태그</span>
             </a>

@@ -39,7 +39,7 @@ export default function NavBar() {
             Beta
           </span>
 
-          <form action="#" method="GET" className="hidden lg:block lg:pl-2">
+          <form action="#" method="GET" className="hidden lg:block lg:pl-5">
             <label for="search" className="sr-only">
               검색
             </label>

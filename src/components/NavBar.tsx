@@ -36,7 +36,7 @@ export default function NavBar() {
             <span className="-mt-0.5 hidden lg:block">플라이</span>
           </a>
           <form action="#" method="GET" className="pl-2 lg:pl-5">
-            <label for="search" className="sr-only">
+            <label htmlFor="search" className="sr-only">
               검색
             </label>
             <div className="relative mt-1 lg:w-96">
@@ -48,9 +48,9 @@ export default function NavBar() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>

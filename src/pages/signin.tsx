@@ -95,7 +95,7 @@ export default function SignIn() {
                 <div className="grid gap-y-4">
                   <div>
                     <label
-                      for="email"
+                      htmlFor="email"
                       className="mb-2 block text-sm dark:text-white"
                     >
                       이메일
@@ -133,7 +133,7 @@ export default function SignIn() {
                   <div>
                     <div className="flex items-center justify-between">
                       <label
-                        for="password"
+                        htmlFor="password"
                         className="mb-2 block text-sm dark:text-white"
                       >
                         비밀번호
@@ -185,7 +185,7 @@ export default function SignIn() {
                     </div>
                     <div className="ml-3">
                       <label
-                        for="remember-me"
+                        htmlFor="remember-me"
                         className="text-sm dark:text-white"
                       >
                         로그인 상태 유지

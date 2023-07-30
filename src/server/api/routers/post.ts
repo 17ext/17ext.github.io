@@ -27,19 +27,17 @@ export const postRouter = createTRPCRouter({
   getAll: publicProcedure
     .input(
       z.object({
-        limit: z.number().min(1).max(100).default(20),
-        cursor: z.string().nullish(),
+        limit: z.number().optional(),
+        cursor: z.object({ id: z.string(), createdAt: z.date() }).optional(),
       })
     )
     .query(async ({ ctx, input }) => {
-      const limit = input.limit ?? 50;
+      const limit = input.limit ?? 10;
       const { cursor } = input;
-      const posts = await prisma.post.findMany({
+      const posts = await ctx.prisma.post.findMany({
         take: limit + 1,
-        cursor: cursor ? { id: cursor } : undefined,
-        orderBy: {
-          created_at: "desc",
-        },
+        cursor: cursor ? { createdAt_id: cursor } : undefined,
+        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
         // include: {
         //   post_category: {
         //     include: {

@@ -1,6 +1,16 @@
 import { Avatar } from "flowbite-react";
 
-export default function PostCard() {
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: Date;
+//   likeCount: number;
+//   likedByMe: boolean;
+//   user: { id: string; image: string | null; name: string | null };
+};
+
+export default function PostCard({id, title, content}: Post) {
   return (
     <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="mb-5 flex items-center justify-between text-gray-500">

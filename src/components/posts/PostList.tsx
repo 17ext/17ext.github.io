@@ -1,33 +1,33 @@
+import InfiniteScroll from "react-infinite-scroller";
 import { Skeleton } from "~/components/loading/Skeleton";
+import { Loading } from "~/components/Loading";
 import { PostCard } from "./PostCard";
 import { api } from "~/utils/api";
 
 export function PostList() {
-  const { data, fetchNextPage, isError, isLoading }  = api.post.getAll.useInfiniteQuery(
-    {},
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor
-    }
-  );
+  const { data, hasNextPage, isInitialLoading, fetchNextPage, isFetchingNextPage } =
+    api.post.getAll.useInfiniteQuery(
+      {},
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      }
+    );
 
   const posts: any = data?.pages.flatMap((page) => page.posts);
 
 
-  const loadMore = () => {
-    fetchNextPage();
-  };
-//   const { isError, isLoading, data } = api.post.getAll.useQuery();
-
-  if (isError) {
-    return <p>게시글을 불러오는데 실패했습니다.</p>;
-  } else if (isLoading) {
-    return <Skeleton />;
+  if (isInitialLoading) {
+    return <Loading width={"full"} height={"full"} />;
   }
   return (
-    <div className="PostList">
+    <InfiniteScroll
+        hasMore={hasNextPage}
+        loadMore={fetchNextPage}
+        className="PostList"
+      >
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
-    </div>
+    </InfiniteScroll>
   );
 }

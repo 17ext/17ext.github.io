@@ -11,3 +11,8 @@ $ pnpm run dev
 ```
 $ npx prisma db push 
 ```
+
+## 배포
+```
+$ pnpm run deploy
+```

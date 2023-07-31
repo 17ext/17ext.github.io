@@ -34,16 +34,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-    #   - name: Cache pnpm modules
-    #     uses: actions/cache@v2
-    #     with:
-    #       path: ~/.pnpm-store
-    #       key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-    #       restore-keys: |
-    #         ${{ runner.os }}-
-
       - name: Install and Build 🔧
-        run: pnpm install && pnpm build && touch ./out/.nojekyll
+        run: pnpm install && pnpm run build && pnpm run export && touch ./out/.nojekyll
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

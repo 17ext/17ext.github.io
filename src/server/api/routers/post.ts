@@ -20,7 +20,7 @@ export const postRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      const limit = input.limit ?? 5;
+      const limit = input.limit ?? 10;
       const { cursor } = input;
       const items = await ctx.prisma.post.findMany({
         take: limit + 1,
@@ -35,7 +35,7 @@ export const postRouter = createTRPCRouter({
         // },
       });
 
-      let nextCursor: typeof input.cursor | undefined = undefined;
+      let nextCursor: typeof cursor | undefined = undefined;
 
       if (items.length > limit) {
         const nextItem = items.pop();

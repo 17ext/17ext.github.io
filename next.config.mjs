@@ -7,7 +7,7 @@ await import("./src/env.mjs");
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  assetPrefix: "./",
+  assetPrefix: "https://17ext.github.io/",
   images: {
     loader: "akamai",
     path: "",
@@ -19,10 +19,10 @@ const config = {
    *
    * @see https://github.com/vercel/next.js/issues/41980
    */
-  //   i18n: {
-  //     locales: ["en"],
-  //     defaultLocale: "en",
-  //   },
+  // i18n: {
+  //   locales: ["en"],
+  //   defaultLocale: "en",
+  // },
 };
 
 export default config;

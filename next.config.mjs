@@ -15,14 +15,6 @@ const config = {
   assetPrefix: isProduction ? "/" : undefined,
   images: {
     unoptimized: true,
-    // remotePatterns: [
-    //   {
-    //     protocol: "https",
-    //     hostname: "raw.githubusercontent.com",
-    //     port: "",
-    //     pathname: "/wujinhjun/wujinhjun-pic/main/**",
-    //   },
-    // ],
   },
   //   images: {
   //     loader: "akamai",

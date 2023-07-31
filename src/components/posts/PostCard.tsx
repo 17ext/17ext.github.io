@@ -10,7 +10,7 @@ type Post = {
 //   user: { id: string; image: string | null; name: string | null };
 };
 
-export default function PostCard({id, title, content}: Post) {
+export function PostCard({post}: Post) {
   return (
     <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="mb-5 flex items-center justify-between text-gray-500">
@@ -28,7 +28,11 @@ export default function PostCard({id, title, content}: Post) {
         <span className="text-sm">14 days ago</span>
       </div>
       <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        <a href="#">How to quickly deploy a static website</a>
+        <a href="#">
+          {post.title.length > 20
+            ? post.title.substring(0, 20) + "..."
+            : post.title}
+        </a>
       </h2>
       <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
         Static websites are now used to bootstrap lots of websites and are

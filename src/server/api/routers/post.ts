@@ -12,31 +12,19 @@ const listSchema = z.object({
 });
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
-  // getAll: publicProcedure.query(({ ctx }) => {
-  //   return ctx.prisma.post.findMany();
-  // }),
-
   getAll: publicProcedure
     .input(
       z.object({
         limit: z.number().optional(),
-        cursor: z.object({ id: z.string(), createdAt: z.date() }).optional(),
+        cursor: z.string().nullish(),
       })
     )
     .query(async ({ ctx, input }) => {
-      const limit = input.limit ?? 10;
+      const limit = input.limit ?? 5;
       const { cursor } = input;
-      const posts = await ctx.prisma.post.findMany({
+      const items = await ctx.prisma.post.findMany({
         take: limit + 1,
-        cursor: cursor ? { createdAt_id: cursor } : undefined,
+        cursor: cursor ? { id: cursor } : undefined,
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
         // include: {
         //   post_category: {
@@ -47,14 +35,15 @@ export const postRouter = createTRPCRouter({
         // },
       });
 
-      let nextCursor: typeof cursor | undefined = undefined;
+      let nextCursor: typeof input.cursor | undefined = undefined;
 
-      if (posts.length > limit) {
-        const nextItem = posts.pop();
-        nextCursor = nextItem!.id;
+      if (items.length > limit) {
+        const nextItem = items.pop();
+        nextCursor = nextItem?.id;
       }
+
       return {
-        posts,
+        items,
         nextCursor,
       };
     }),

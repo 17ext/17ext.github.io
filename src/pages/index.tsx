@@ -1,11 +1,9 @@
 import Layout from "~/components/Layout";
 import Head from "next/head";
-import {PostList} from "~/components/posts/PostList";
-import { api } from "~/utils/api";
+import { PostList } from "~/components/posts/PostList";
+// import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
-
   return (
     <>
       <Head>

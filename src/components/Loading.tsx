@@ -14,7 +14,7 @@ export const Loading: FC<{ width: string; height: string }> = ({
         color="#4fa94d"
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
-        wrapperClassName=""
+        wrapperClass="wrapper-class"
         visible={true}
       />
       {/* <MagnifyingGlass

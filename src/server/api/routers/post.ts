@@ -5,10 +5,10 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
-const listSchema = z.object({
-  name: z.string().nonempty(),
-  alias: z.string().nonempty(),
-  regex: z.string().optional(),
+const postSchema = z.object({
+  title: z.string().nonempty(),
+  content: z.string().nonempty(),
+//   regex: z.string().optional(),
 });
 
 export const postRouter = createTRPCRouter({
@@ -47,60 +47,60 @@ export const postRouter = createTRPCRouter({
         nextCursor,
       };
     }),
-  create: protectedProcedure
-    .input(listSchema)
-    .mutation(async ({ ctx, input }) => {
-      const result = await ctx.prisma.list.create({
-        data: {
-          ...input,
-          createdBy: ctx.session.user.id,
-        },
-      });
-      return result;
-    }),
-  get: publicProcedure
-    .input(
-      z.object({
-        id: z.string(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const result = await ctx.prisma.list.findUnique({
-        where: {
-          id: input.id,
-        },
-        include: {
-          items: true,
-        },
-      });
+//   create: protectedProcedure
+//     .input(postSchema)
+//     .mutation(async ({ ctx, input }) => {
+//       const result = await ctx.prisma.post.create({
+//         data: {
+//           ...input,
+//           //   createdBy: ctx.session.user.id,
+//         },
+//       });
+//       return result;
+//     }),
+//   get: publicProcedure
+//     .input(
+//       z.object({
+//         id: z.string(),
+//       })
+//     )
+//     .query(async ({ ctx, input }) => {
+//       const result = await ctx.prisma.list.findUnique({
+//         where: {
+//           id: input.id,
+//         },
+//         include: {
+//           items: true,
+//         },
+//       });
 
-      if (!result) return null;
+//       if (!result) return null;
 
-      return {
-        ...result,
-        author: undefined,
-        items: result.items.map((item) => {
-          return {
-            ...item,
-            author: undefined,
-          };
-        }),
-      };
-    }),
-  update: protectedProcedure
-    .input(
-      z.object({
-        id: z.string(),
-        data: listSchema,
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const result = await ctx.prisma.rule.update({
-        where: {
-          id: input.id,
-        },
-        data: input.data,
-      });
-      return result;
-    }),
+//       return {
+//         ...result,
+//         author: undefined,
+//         items: result.items.map((item) => {
+//           return {
+//             ...item,
+//             author: undefined,
+//           };
+//         }),
+//       };
+//     }),
+//   update: protectedProcedure
+//     .input(
+//       z.object({
+//         id: z.string(),
+//         data: postSchema,
+//       })
+//     )
+//     .mutation(async ({ ctx, input }) => {
+//       const result = await ctx.prisma.rule.update({
+//         where: {
+//           id: input.id,
+//         },
+//         data: input.data,
+//       });
+//       return result;
+//     }),
 });

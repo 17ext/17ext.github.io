@@ -1,11 +1,12 @@
 import InfiniteScroll from "react-infinite-scroller";
+import { Post } from "@prisma/client";
 // import { Skeleton } from "~/components/loading/Skeleton";
 import { Loading } from "~/components/Loading";
 import { PostCard } from "./PostCard";
 import { api } from "~/utils/api";
 
 export function PostList() {
-  const { data, fetchNextPage, hasNextPage, isInitialLoading } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isInitialLoading } =
     api.post.getAll.useInfiniteQuery(
       {limit: 5},
       {
@@ -13,7 +14,7 @@ export function PostList() {
       }
     );
 
-  const posts: any = data?.pages.flatMap((page) => page.items);
+  const posts: Post[] = data?.pages.flatMap((page) => page.items) ?? [];
 
 
   if (isInitialLoading) {
@@ -23,11 +24,11 @@ export function PostList() {
     <InfiniteScroll
       pageStart={0}
       hasMore={hasNextPage}
-      loadMore={() => fetchNextPage()}
+      loadMore={() => !isFetchingNextPage && void fetchNextPage()}
       className={"grid-view grid-view-center grid-view-lg"}
     >
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+      {posts.map((post, index) => (
+        <PostCard key={index} post={post} />
       ))}
     </InfiniteScroll>
   );

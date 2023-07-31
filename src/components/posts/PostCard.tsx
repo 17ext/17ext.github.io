@@ -1,16 +1,8 @@
+import { FC } from "react";
 import { Avatar } from "flowbite-react";
+import { Post } from "@prisma/client";
 
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  createdAt: Date;
-//   likeCount: number;
-//   likedByMe: boolean;
-//   user: { id: string; image: string | null; name: string | null };
-};
-
-export function PostCard({post}: Post) {
+export const PostCard: FC<{ post: Post }> = ({ post }) => {
   return (
     <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="mb-5 flex items-center justify-between text-gray-500">
@@ -66,4 +58,4 @@ export function PostCard({post}: Post) {
       </div>
     </article>
   );
-}
+};

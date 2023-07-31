@@ -23,7 +23,7 @@ export default function NavBar() {
     <header className="fixed z-50 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
       <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-4 md:px-8 lg:px-16">
         <div className="flex items-center justify-start">
-          <a
+          <Link
             className="flex items-center space-x-2.5 font-bold text-slate-800 no-underline dark:text-white"
             href="/"
           >
@@ -34,7 +34,7 @@ export default function NavBar() {
               alt="로고"
             />
             <span className="-mt-0.5 hidden lg:block">플라이</span>
-          </a>
+          </Link>
           <form action="#" method="GET" className="pl-2 lg:pl-5">
             <label htmlFor="search" className="sr-only">
               검색

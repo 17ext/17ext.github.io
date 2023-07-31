@@ -106,7 +106,7 @@ export default function SignIn() {
                         id="email"
                         name="email"
                         className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-                        required=""
+                        required
                         aria-describedby="email-error"
                       />
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex hidden items-center pr-3">
@@ -151,7 +151,7 @@ export default function SignIn() {
                         id="password"
                         name="password"
                         className="block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-                        required=""
+                        required
                         aria-describedby="password-error"
                       />
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex hidden items-center pr-3">

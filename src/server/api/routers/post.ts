@@ -47,39 +47,6 @@ export const postRouter = createTRPCRouter({
         nextCursor,
       };
     }),
-
-  //   getAll: publicProcedure
-  //     .input(
-  //       z.object({
-  //         offset: z.number().optional(),
-  //         limit: z.number().optional(),
-  //       })
-  //     )
-  //     .query(async ({ ctx, input }) => {
-  //       const [count, rows] = await ctx.prisma.$transaction([
-  //         ctx.prisma.list.count(),
-  //         ctx.prisma.list.findMany({
-  //           skip: input.offset,
-  //           take: input.limit,
-  //           include: {
-  //             _count: {
-  //               select: {
-  //                 items: true,
-  //               },
-  //             },
-  //           },
-  //         }),
-  //       ]);
-  //       return {
-  //         count,
-  //         rows: rows.map((list) => {
-  //           return {
-  //             ...list,
-  //             author: undefined,
-  //           };
-  //         }),
-  //       };
-  //     }),
   create: protectedProcedure
     .input(listSchema)
     .mutation(async ({ ctx, input }) => {

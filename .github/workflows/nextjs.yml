@@ -12,18 +12,20 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 'v16.15.0'
+          cache: 'pnpm'
 
-      - name: Install and Build 🔧
-        run: |
-          npm install -g pnpm
-          pnpm install
-          pnpm build && touch dist/public/.nojekyll
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build site
+        run: pnpm run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist/public
+          folder: dist

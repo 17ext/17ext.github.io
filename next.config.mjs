@@ -4,20 +4,14 @@
  */
 await import("./src/env.mjs");
 
-// const isProduction = process.env.NODE_ENV === "production";
-
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  //   assetPrefix: isProduction ? "/" : undefined,
+  assetPrefix: "/",
   basePath: "",
-    images: {
-      unoptimized: true,
-    },
-  //   images: {
-  //     loader: "akamai",
-  //     path: "",
-  //   },
+  images: {
+    unoptimized: true,
+  },
 
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config

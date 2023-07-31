@@ -37,29 +37,13 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    //   session: ({ session, user }) => ({
-    //     ...session,
-    //     user: {
-    //       ...session.user,
-    //     //   id: user.id,
-    //     ...user,
-    //     },
-    //   }),
-    session ({ session, user }) {
-        console.log('======================');
-        console.log(session.user);
-        console.log("======================");
-        console.log(user);
-        console.log("======================");
-        return {
+      session: ({ session, user }) => ({
         ...session,
         user: {
-            ...session.user,
-            //   id: user.id,
-            ...user,
+          ...session.user,
+        ...user,
         },
-        }; 
-    },
+      }),
   },
   adapter: PrismaAdapter(prisma),
   secret: env.NEXTAUTH_SECRET,
@@ -76,12 +60,9 @@ export const authOptions: NextAuthOptions = {
  *
  * @see https://next-auth.js.org/configuration/nextjs
  */
-// export const getServerAuthSession = (ctx: {
-//   req: GetServerSidePropsContext["req"];
-//   res: GetServerSidePropsContext["res"];
-// }) => {
-//   return getServerSession(ctx.req, ctx.res, authOptions);
-// };
-export const getServerAuthSession = () => {
-  return getServerSession(authOptions);
+export const getServerAuthSession = (ctx: {
+  req: GetServerSidePropsContext["req"];
+  res: GetServerSidePropsContext["res"];
+}) => {
+  return getServerSession(ctx.req, ctx.res, authOptions);
 };

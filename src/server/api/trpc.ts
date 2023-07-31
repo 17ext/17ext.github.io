@@ -51,14 +51,29 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts;
+// FetchCreateContextFnOptions
+// export const createTRPCContext = async (opts: CreateNextContextOptions) => {
+//   const { req, res } = opts;
+
+//   // Get the session from the server using the getServerSession wrapper function
+//   const session = await getServerAuthSession({ req, res });
+
+//   return createInnerTRPCContext({
+//     session,
+//   });
+// };
+export const createTRPCContext = async (opts: FetchCreateContextFnOptions) => {
+  const req = opts.req;
+  const boxToken = opts?.req.headers.get("box-token");
+  const ip = req.headers.get("x-forwarded-for");
 
   // Get the session from the server using the getServerSession wrapper function
-  const session = await getServerAuthSession({ req, res });
+  const session = await getServerAuthSession();
 
   return createInnerTRPCContext({
     session,
+    boxToken,
+    ip,
   });
 };
 

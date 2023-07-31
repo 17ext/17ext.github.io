@@ -1,47 +1,47 @@
-name: GitHub Pages Deploy
+# name: GitHub Pages Deploy
 
-on:
-  push:
-    branches: ['main']
+# on:
+#   push:
+#     branches: ['main']
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout 🛎️
+#         uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+#       - name: Install Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 16
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: latest
+#       - uses: pnpm/action-setup@v2
+#         with:
+#           version: latest
 
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+#       - name: Get pnpm store directory
+#         shell: bash
+#         run: |
+#           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+#       - uses: actions/cache@v3
+#         name: Setup pnpm cache
+#         with:
+#           path: ${{ env.STORE_PATH }}
+#           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pnpm-store-
 
-      - name: Install and Build 🔧
-        run: pnpm install && pnpm run export && touch ./out/.nojekyll
+#       - name: Install and Build 🔧
+#         run: pnpm install && pnpm run export && touch ./out/.nojekyll
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: out
+#       - name: Deploy
+#         uses: JamesIves/github-pages-deploy-action@v4
+#         with:
+#           branch: gh-pages
+#           folder: out

@@ -8,8 +8,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "serve": "npx http-server out",
-    "export": "next export"
+    "export": "next build && next export",
+    "serve": "npx http-server out"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",

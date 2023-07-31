@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install and Build 🔧
-        run: pnpm install && pnpm run build && pnpm run export && touch ./out/.nojekyll
+        run: pnpm install && pnpm run export && touch ./out/.nojekyll
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

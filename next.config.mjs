@@ -4,18 +4,16 @@
  */
 await import("./src/env.mjs");
 
-const isProduction = process.env.NODE_ENV === "production";
-console.log('===========================');
-console.log('isProduction', isProduction);
-console.log('===========================');
+// const isProduction = process.env.NODE_ENV === "production";
 
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  assetPrefix: isProduction ? "/" : undefined,
-  images: {
-    unoptimized: true,
-  },
+  //   assetPrefix: isProduction ? "/" : undefined,
+  basePath: "",
+    images: {
+      unoptimized: true,
+    },
   //   images: {
   //     loader: "akamai",
   //     path: "",

@@ -6,10 +6,8 @@ await import("./src/env.mjs");
 
 /** @type {import("next").NextConfig} */
 const config = {
-  appDir: true,
   reactStrictMode: true,
   assetPrefix: "/",
-  basePath: "",
   images: {
     unoptimized: true,
   },
